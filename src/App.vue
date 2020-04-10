@@ -3,10 +3,10 @@
     <nav class="navbar navbar-dark bg-info fixed-top">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link text-white" href="#"><i class="fas fa-sync"></i></a>
+          <a class="nav-link text-white" href="#" @click.prevent="resetDate"><i class="fas fa-sync"></i></a>
         </li>
       </ul>
-      <span class="navbar-text mr-auto text-white">Avril 2020</span>
+      <span class="navbar-text mr-auto text-white text-capitalize">{{ showMonthYear }}</span>
       <ul class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link text-white" href="#"><i class="fas fa-cog"></i></a>
@@ -15,52 +15,52 @@
     </nav>
     <section class="container-fluid py-2 bg-info px-custom-0 fixed-top">
       <nav class="nav nav-pills nav-justified">
-        <a class="nav-item nav-link mw-50" href="#">
+        <a class="nav-item nav-link mw-50" href="#" @click.prevent="prevWeek">
           <div class="row text-center text-white h-100">
             <div class="col p-0 align-self-center"><i class="fas fa-angle-left"></i></div>
           </div>
         </a>
-        <a class="nav-item nav-link" href="#">
+        <a class="nav-item nav-link" :class="{ active: hasSelect(showMonday) }" href="#" @click.prevent="selectDate(showMonday)">
           <div class="row text-center text-white">
             <div class="col p-0">L<span class="d-none d-md-inline">undi</span></div>
           </div>
           <div class="row text-center text-white">
-            <div class="col p-0 day">6<span class="d-none d-md-inline">/04</span></div>
+            <div class="col p-0 day">{{ showMonday.day }}<span class="d-none d-md-inline">/{{ showMonday.toFormat('LL') }}</span></div>
           </div>
         </a>
-        <a class="nav-item nav-link" href="#">
+        <a class="nav-item nav-link" :class="{ active: hasSelect(showTuesday) }" href="#" @click.prevent="selectDate(showTuesday)">
           <div class="row text-center text-white">
             <div class="col p-0">M<span class="d-none d-md-inline">ardi</span></div>
           </div>
           <div class="row text-center text-white">
-            <div class="col p-0 day">7<span class="d-none d-md-inline">/04</span></div>
+            <div class="col p-0 day">{{ showTuesday.day }}<span class="d-none d-md-inline">/{{ showTuesday.toFormat('LL') }}</span></div>
           </div>
         </a>
-        <a class="nav-item nav-link" href="#">
+        <a class="nav-item nav-link" :class="{ active: hasSelect(showWednesday) }" href="#" @click.prevent="selectDate(showWednesday)">
           <div class="row text-center text-white">
             <div class="col p-0">M<span class="d-none d-md-inline">ercredi</span></div>
           </div>
           <div class="row text-center text-white">
-            <div class="col p-0 day">8<span class="d-none d-md-inline">/04</span></div>
+            <div class="col p-0 day">{{ showWednesday.day }}<span class="d-none d-md-inline">/{{ showWednesday.toFormat('LL') }}</span></div>
           </div>
         </a>
-        <a class="nav-item nav-link" href="#">
+        <a class="nav-item nav-link" :class="{ active: hasSelect(showThursday) }" href="#" @click.prevent="selectDate(showThursday)">
           <div class="row text-center text-white">
             <div class="col p-0">J<span class="d-none d-md-inline">eudi</span></div>
           </div>
           <div class="row text-center text-white">
-            <div class="col p-0 day">9<span class="d-none d-md-inline">/04</span></div>
+            <div class="col p-0 day">{{ showThursday.day }}<span class="d-none d-md-inline">/{{ showThursday.toFormat('LL') }}</span></div>
           </div>
         </a>
-        <a class="nav-item nav-link" href="#">
+        <a class="nav-item nav-link" :class="{ active: hasSelect(showFriday) }" href="#" @click.prevent="selectDate(showFriday)">
           <div class="row text-center text-white">
             <div class="col p-0">V<span class="d-none d-md-inline">endredi</span></div>
           </div>
           <div class="row text-center text-white">
-            <div class="col p-0 day">10<span class="d-none d-md-inline">/04</span></div>
+            <div class="col p-0 day">{{ showFriday.day }}<span class="d-none d-md-inline">/{{ showFriday.toFormat('LL') }}</span></div>
           </div>
         </a>
-        <a class="nav-item nav-link mw-50" href="#">
+        <a class="nav-item nav-link mw-50" href="#" @click.prevent="nextWeek">
           <div class="row text-center text-white h-100">
             <div class="col p-0 align-self-center"><i class="fas fa-angle-right"></i></div>
           </div>
@@ -129,7 +129,52 @@
 <script>
 
 export default {
-  name: 'app'
+  name: 'app',
+  data () {
+    return {
+      showDate: window.DateTime.local()
+    }
+  },
+  computed: {
+    showMonthYear () {
+      return this.showDate.setLocale('fr').toFormat('LLLL y')
+    },
+    startWeekDate () {
+      return this.showDate.startOf('week')
+    },
+    showMonday () {
+      return this.startWeekDate
+    },
+    showTuesday () {
+      return this.startWeekDate.plus({ day: 1 })
+    },
+    showWednesday () {
+      return this.startWeekDate.plus({ day: 2 })
+    },
+    showThursday () {
+      return this.startWeekDate.plus({ day: 3 })
+    },
+    showFriday () {
+      return this.startWeekDate.plus({ day: 4 })
+    }
+  },
+  methods: {
+    resetDate () {
+      this.showDate = window.DateTime.local()
+    },
+    prevWeek () {
+      this.showDate = this.showDate.plus({weeks: -1}).endOf('week').plus({days: -2})
+    },
+    nextWeek () {
+      this.showDate = this.showDate.plus({weeks: 1}).startOf('week')
+    },
+    selectDate (newDate) {
+      this.showDate = newDate
+    },
+    hasSelect (date) {
+      return this.showDate.day === date.day
+    }
+  }
 }
 </script>
 
