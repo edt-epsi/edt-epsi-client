@@ -9,7 +9,7 @@
       <span class="navbar-text mr-auto text-white text-capitalize">{{ showMonthYear }}</span>
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link text-white" href="#"><i class="fas fa-cog"></i></a>
+          <a class="nav-link text-white" href="#" data-toggle="modal" data-target="#configModal"><i class="fas fa-cog"></i></a>
         </li>
       </ul>
     </nav>
@@ -111,6 +111,22 @@
         </div>
       </div>
     </main>
+    <!-- Modal -->
+    <div class="modal fade" id="configModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="configModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="configModalLabel">Configuration</h5>
+          </div>
+          <div class="modal-body">
+            <input type="text" class="form-control" v-model="newTel" placeholder="prenom.nom">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-info" data-dismiss="modal" @click="persistTel">Enregistrer</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -120,7 +136,9 @@ export default {
   name: 'app',
   data () {
     return {
-      showDate: window.DateTime.local()
+      showDate: window.DateTime.local(),
+      tel: '',
+      newTel: ''
     }
   },
   computed: {
@@ -161,6 +179,16 @@ export default {
     },
     hasSelect (date) {
       return this.showDate.day === date.day
+    },
+    persistTel () {
+      this.tel = window.localStorage.tel = this.newTel
+    }
+  },
+  mounted () {
+    if (window.localStorage.tel) {
+      this.newTel = this.tel = window.localStorage.tel
+    } else {
+      window.$('#configModal').modal()
     }
   }
 }
