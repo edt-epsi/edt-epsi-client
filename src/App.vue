@@ -67,61 +67,49 @@
         </a>
       </nav>
     </section>
-    <main class="container-fluid pt-4">
-      <table class="table">
-        <tr>
-          <th>8h</th>
-          <th></th>
-        </tr>
-        <tr>
-          <th>9h</th>
-          <th></th>
-        </tr>
-        <tr>
-          <th>10h</th>
-          <th></th>
-        </tr>
-        <tr>
-          <th>11h</th>
-          <th></th>
-        </tr>
-        <tr>
-          <th>12h</th>
-          <th></th>
-        </tr>
-        <tr>
-          <th>13h</th>
-          <th></th>
-        </tr>
-        <tr>
-          <th>14h</th>
-          <th></th>
-        </tr>
-        <tr>
-          <th>15h</th>
-          <th></th>
-        </tr>
-        <tr>
-          <th>16h</th>
-          <th></th>
-        </tr>
-        <tr>
-          <th>17h</th>
-          <th></th>
-        </tr>
-        <tr>
-          <th>18h</th>
-          <th></th>
-        </tr>
-        <tr>
-          <th>19h</th>
-          <th></th>
-        </tr>
-        <tr>
-          <th>20h</th>
-          <th></th>
-        </tr>
-      </table>
+    <main class="container-fluid pt-4 px-custom-0 container-schedule">
+      <div class="overlay">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+      <div class="schedule">
+        <div class="sc-head text-center">
+          <div>8h</div>
+          <div>9h</div>
+          <div>10h</div>
+          <div>11h</div>
+          <div>12h</div>
+          <div>13h</div>
+          <div>14h</div>
+          <div>15h</div>
+          <div>16h</div>
+          <div>17h</div>
+          <div>18h</div>
+          <div>19h</div>
+          <div>20h</div>
+        </div>
+        <div class="sc-monday" :class="{ active: hasSelect(showMonday) }">
+        </div>
+        <div class="sc-tuesday" :class="{ active: hasSelect(showTuesday) }">
+        </div>
+        <div class="sc-wednesday" :class="{ active: hasSelect(showWednesday) }">
+        </div>
+        <div class="sc-thursday" :class="{ active: hasSelect(showThursday) }">
+        </div>
+        <div class="sc-friday" :class="{ active: hasSelect(showFriday) }">
+        </div>
+      </div>
     </main>
   </div>
 </template>
@@ -198,34 +186,59 @@ export default {
     max-width: 50px;
   }
 
-  .table {
-    table-layout: fixed;
-  }
-
-  .table tr th:first-child {
-    position: relative;
-    top: -25px;
-    border-top: none;
-  }
-
-  .table th {
-    width: 50px;
-  }
-
   .nav-pills .nav-link.active,
   .nav-pills .show>.nav-link {
     background-color: #0c5460 !important;
   }
 
+  .schedule {
+    display: grid;
+    column-gap: 2px;
+    grid-template-columns: 50px repeat(5, 1fr) 50px;
+  }
+
+  .schedule > div,
+  .overlay {
+    display: grid;
+    grid-template-rows: repeat(12, 50px);
+  }
+
+  .line {
+    height: 1px;
+    background-color: #dee2e6;
+    width: 100%;
+  }
+
+  .container-schedule {
+    position: relative;
+  }
+
+  .sc-head {
+    margin-top: -13px;
+    background-color: white;
+  }
+
+  .container-schedule > div {
+    position: absolute;
+    top: 1.5rem;
+    left: 15px;
+    right: 15px;
+  }
+
   @media (max-width: 991.98px) {
-    .table td:not(.active),
-    .table tr th:last-child {
+    .schedule > div:not(.active):not(.sc-head) {
       display: none;
     }
 
     .px-custom-0 {
       padding-left: 0;
       padding-right: 0;
+    }
+
+    .schedule {
+      display: grid;
+      column-gap: 2px;
+      grid-template-columns: 50px auto;
     }
   }
 </style>
