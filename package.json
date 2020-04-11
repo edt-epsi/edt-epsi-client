@@ -11,7 +11,8 @@
     "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {
-    "vue": "^2.5.2"
+    "vue": "^2.5.2",
+    "vue-resource": "^1.5.1"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.13.0",

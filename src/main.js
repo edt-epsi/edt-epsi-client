@@ -5,12 +5,24 @@ import 'bootstrap/dist/js/bootstrap.min'
 import { DateTime } from 'luxon'
 import Vue from 'vue'
 import App from './App'
+import VueResource from 'vue-resource'
 
 window.$ = jquery
 window.jQuery = jquery
 window.DateTime = DateTime
 
+Vue.use(VueResource)
+
 Vue.config.productionTip = false
+Vue.http.options.root = 'https://edt.mathiasughetto.fr/api/week'
+
+Vue.http.interceptors.push((request, next) => {
+  next((response) => {
+    if (request.after) {
+      request.after.call(this, response)
+    }
+  })
+})
 
 /* eslint-disable no-new */
 new Vue({

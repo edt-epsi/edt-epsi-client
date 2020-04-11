@@ -100,14 +100,134 @@
           <div>20h</div>
         </div>
         <div class="sc-monday" :class="{ active: hasSelect(showMonday) }">
+          <div class="text-white bg-info p-3" v-for="course in mondayCourses" :class="predictStartEnd(course)">
+            <div class="row">
+              <div class="col-auto mr-auto">
+                <span class="badge badge-pill badge-light">
+                    {{ course.debut.split(':')[0] }}h - {{ course.fin.split(':')[0] }}h
+                </span>
+              </div>
+              <div class="col-auto">
+                <span class="badge badge-pill badge-light">
+                    {{ course.salle }}
+                </span>
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col">
+                <p class="h5">
+                  {{ course.matiere }}
+                </p>
+                <p>
+                  {{ course.prof }}
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="sc-tuesday" :class="{ active: hasSelect(showTuesday) }">
+          <div class="text-white bg-info p-3" v-for="course in tuesdayCourses" :class="predictStartEnd(course)">
+            <div class="row">
+              <div class="col-auto mr-auto">
+                <span class="badge badge-pill badge-light">
+                    {{ course.debut.split(':')[0] }}h - {{ course.fin.split(':')[0] }}h
+                </span>
+              </div>
+              <div class="col-auto">
+                <span class="badge badge-pill badge-light">
+                    {{ course.salle }}
+                </span>
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col">
+                <p class="h5">
+                  {{ course.matiere }}
+                </p>
+                <p>
+                  {{ course.prof }}
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="sc-wednesday" :class="{ active: hasSelect(showWednesday) }">
+          <div class="text-white bg-info p-3" v-for="course in wednesdayCourses" :class="predictStartEnd(course)">
+            <div class="row">
+              <div class="col-auto mr-auto">
+                <span class="badge badge-pill badge-light">
+                    {{ course.debut.split(':')[0] }}h - {{ course.fin.split(':')[0] }}h
+                </span>
+              </div>
+              <div class="col-auto">
+                <span class="badge badge-pill badge-light">
+                    {{ course.salle }}
+                </span>
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col">
+                <p class="h5">
+                  {{ course.matiere }}
+                </p>
+                <p>
+                  {{ course.prof }}
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="sc-thursday" :class="{ active: hasSelect(showThursday) }">
+          <div class="text-white bg-info p-3" v-for="course in thursdayCourses" :class="predictStartEnd(course)">
+            <div class="row">
+              <div class="col-auto mr-auto">
+                <span class="badge badge-pill badge-light">
+                    {{ course.debut.split(':')[0] }}h - {{ course.fin.split(':')[0] }}h
+                </span>
+              </div>
+              <div class="col-auto">
+                <span class="badge badge-pill badge-light">
+                    {{ course.salle }}
+                </span>
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col">
+                <p class="h5">
+                  {{ course.matiere }}
+                </p>
+                <p>
+                  {{ course.prof }}
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="sc-friday" :class="{ active: hasSelect(showFriday) }">
+          <div class="text-white bg-info p-3" v-for="course in fridayCourses" :class="predictStartEnd(course)">
+            <div class="row">
+              <div class="col-auto mr-auto">
+                <span class="badge badge-pill badge-light">
+                    {{ course.debut.split(':')[0] }}h - {{ course.fin.split(':')[0] }}h
+                </span>
+              </div>
+              <div class="col-auto">
+                <span class="badge badge-pill badge-light">
+                    {{ course.salle }}
+                </span>
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col">
+                <p class="h5">
+                  {{ course.matiere }}
+                </p>
+                <p>
+                  {{ course.prof }}
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </main>
@@ -127,6 +247,9 @@
         </div>
       </div>
     </div>
+    <div class="loader" v-if="loading">
+      <i class="fas fa-spinner fa-spin"></i>
+    </div>
   </div>
 </template>
 
@@ -138,7 +261,13 @@ export default {
     return {
       showDate: window.DateTime.local(),
       tel: '',
-      newTel: ''
+      newTel: '',
+      loading: false,
+      mondayCourses: [],
+      tuesdayCourses: [],
+      wednesdayCourses: [],
+      thursdayCourses: [],
+      fridayCourses: []
     }
   },
   computed: {
@@ -170,9 +299,11 @@ export default {
     },
     prevWeek () {
       this.showDate = this.showDate.plus({weeks: -1}).endOf('week').plus({days: -2})
+      this.loadData()
     },
     nextWeek () {
       this.showDate = this.showDate.plus({weeks: 1}).startOf('week')
+      this.loadData()
     },
     selectDate (newDate) {
       this.showDate = newDate
@@ -182,11 +313,39 @@ export default {
     },
     persistTel () {
       this.tel = window.localStorage.tel = this.newTel
+      this.loadData()
+    },
+    predictStartEnd (course) {
+      let debut = course.debut.split(':')[0]
+      let fin = course.fin.split(':')[0]
+      return 'start-' + parseInt(debut) + ' end-' + parseInt(fin)
+    },
+    loadData () {
+      this.$weekCourses.query({tel: this.tel, date: this.showDate.toFormat('d-MM-yyyy')})
+        .then((response) => {
+          this.mondayCourses = response.data[0].courses
+          this.tuesdayCourses = response.data[1].courses
+          this.wednesdayCourses = response.data[2].courses
+          this.thursdayCourses = response.data[3].courses
+          this.fridayCourses = response.data[4].courses
+        }, (response) => {
+          console.error(response)
+        })
     }
   },
   mounted () {
+    this.$weekCourses = this.$resource('{tel}{/date}', {}, {}, {
+      before: () => {
+        this.loading = true
+      },
+      after: () => {
+        this.loading = false
+      }
+    })
+
     if (window.localStorage.tel) {
       this.newTel = this.tel = window.localStorage.tel
+      this.loadData()
     } else {
       window.$('#configModal').modal()
     }
@@ -194,6 +353,7 @@ export default {
 }
 </script>
 
+<style src="./grids.scss"></style>
 <style lang="scss">
   @import "~bootstrap/dist/css/bootstrap.min.css";
   @import "~@fortawesome/fontawesome-free/css/all.min.css";
@@ -212,6 +372,19 @@ export default {
 
   .mw-50 {
     max-width: 50px;
+  }
+
+  .loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    text-align: center;
+    padding-top: 186px;
+    color: white;
+    font-size: 50px;
   }
 
   .nav-pills .nav-link.active,
