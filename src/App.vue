@@ -69,19 +69,97 @@
     </section>
     <main class="container-fluid pt-4 px-custom-0 container-schedule">
       <div class="overlay">
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
+        <div class="line">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="line">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="line">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="line">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="line">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="line">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="line">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="line">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="line">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="line">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="line">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="line">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="line">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
       </div>
       <div class="schedule">
         <div class="sc-head text-center">
@@ -416,10 +494,12 @@ export default {
     grid-template-rows: repeat(12, 50px);
   }
 
-  .line {
-    height: 1px;
-    background-color: #dee2e6;
+  .overlay .line {
+    height: 100%;
+    border-top: 1px solid #dee2e6;
     width: 100%;
+    padding-left: 50px;
+    padding-right: 50px;
   }
 
   .container-schedule {
@@ -436,6 +516,25 @@ export default {
     top: 1.5rem;
     left: 15px;
     right: 15px;
+  }
+  @media (min-width: 992px) {
+    .overlay .line {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+    }
+
+    .overlay .line>div {
+      border-right: 1px solid #fdce37;
+      border-left: 1px solid #fdce37;
+    }
+
+    .overlay .line>div:first-child {
+      border-left: none;
+    }
+
+    .overlay .line>div:last-child {
+      border-right: none;
+    }
   }
 
   @media (max-width: 991.98px) {
