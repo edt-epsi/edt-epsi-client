@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <nav class="navbar navbar-dark bg-info fixed-top">
+    <nav class="navbar navbar-dark bg-epsi-dark fixed-top">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
           <a class="nav-link text-white" href="#" @click.prevent="resetDate"><i class="fas fa-sync"></i></a>
@@ -13,7 +13,7 @@
         </li>
       </ul>
     </nav>
-    <section class="container-fluid py-2 bg-info px-custom-0 fixed-top">
+    <section class="container-fluid py-2 bg-epsi-dark px-custom-0 fixed-top">
       <nav class="nav nav-pills nav-justified">
         <a class="nav-item nav-link mw-50" href="#" @click.prevent="prevWeek">
           <div class="row text-center text-white h-100">
@@ -100,15 +100,15 @@
           <div>20h</div>
         </div>
         <div class="sc-monday" :class="{ active: hasSelect(showMonday) }">
-          <div class="text-white bg-info p-3" v-for="course in mondayCourses" :class="predictStartEnd(course)">
+          <div class="text-white bg-epsi-light p-3" v-for="course in mondayCourses" :class="predictStartEnd(course)">
             <div class="row">
               <div class="col-auto mr-auto">
-                <span class="badge badge-pill badge-light">
+                <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
                     {{ course.debut.split(':')[0] }}h - {{ course.fin.split(':')[0] }}h
                 </span>
               </div>
               <div class="col-auto">
-                <span class="badge badge-pill badge-light">
+                <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
                     {{ course.salle }}
                 </span>
               </div>
@@ -126,15 +126,15 @@
           </div>
         </div>
         <div class="sc-tuesday" :class="{ active: hasSelect(showTuesday) }">
-          <div class="text-white bg-info p-3" v-for="course in tuesdayCourses" :class="predictStartEnd(course)">
+          <div class="text-white bg-epsi-light p-3" v-for="course in tuesdayCourses" :class="predictStartEnd(course)">
             <div class="row">
               <div class="col-auto mr-auto">
-                <span class="badge badge-pill badge-light">
+                <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
                     {{ course.debut.split(':')[0] }}h - {{ course.fin.split(':')[0] }}h
                 </span>
               </div>
               <div class="col-auto">
-                <span class="badge badge-pill badge-light">
+                <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
                     {{ course.salle }}
                 </span>
               </div>
@@ -152,15 +152,15 @@
           </div>
         </div>
         <div class="sc-wednesday" :class="{ active: hasSelect(showWednesday) }">
-          <div class="text-white bg-info p-3" v-for="course in wednesdayCourses" :class="predictStartEnd(course)">
+          <div class="text-white bg-epsi-light p-3" v-for="course in wednesdayCourses" :class="predictStartEnd(course)">
             <div class="row">
               <div class="col-auto mr-auto">
-                <span class="badge badge-pill badge-light">
+                <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
                     {{ course.debut.split(':')[0] }}h - {{ course.fin.split(':')[0] }}h
                 </span>
               </div>
               <div class="col-auto">
-                <span class="badge badge-pill badge-light">
+                <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
                     {{ course.salle }}
                 </span>
               </div>
@@ -178,15 +178,15 @@
           </div>
         </div>
         <div class="sc-thursday" :class="{ active: hasSelect(showThursday) }">
-          <div class="text-white bg-info p-3" v-for="course in thursdayCourses" :class="predictStartEnd(course)">
+          <div class="text-white bg-epsi-light p-3" v-for="course in thursdayCourses" :class="predictStartEnd(course)">
             <div class="row">
               <div class="col-auto mr-auto">
-                <span class="badge badge-pill badge-light">
+                <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
                     {{ course.debut.split(':')[0] }}h - {{ course.fin.split(':')[0] }}h
                 </span>
               </div>
               <div class="col-auto">
-                <span class="badge badge-pill badge-light">
+                <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
                     {{ course.salle }}
                 </span>
               </div>
@@ -204,15 +204,15 @@
           </div>
         </div>
         <div class="sc-friday" :class="{ active: hasSelect(showFriday) }">
-          <div class="text-white bg-info p-3" v-for="course in fridayCourses" :class="predictStartEnd(course)">
+          <div class="text-white bg-epsi-light p-3" v-for="course in fridayCourses" :class="predictStartEnd(course)">
             <div class="row">
               <div class="col-auto mr-auto">
-                <span class="badge badge-pill badge-light">
+                <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
                     {{ course.debut.split(':')[0] }}h - {{ course.fin.split(':')[0] }}h
                 </span>
               </div>
               <div class="col-auto">
-                <span class="badge badge-pill badge-light">
+                <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
                     {{ course.salle }}
                 </span>
               </div>
@@ -355,7 +355,14 @@ export default {
 
 <style src="./grids.scss"></style>
 <style lang="scss">
-  @import "~bootstrap/dist/css/bootstrap.min.css";
+
+  $theme-colors: (
+    "epsi-dark": #271549,
+    "epsi-light": #77649b,
+    "epsi-yellow": #fdce37
+  );
+
+  @import "~bootstrap/scss/bootstrap";
   @import "~@fortawesome/fontawesome-free/css/all.min.css";
 
   html, body {
@@ -389,7 +396,12 @@ export default {
 
   .nav-pills .nav-link.active,
   .nav-pills .show>.nav-link {
-    background-color: #0c5460 !important;
+    background-color: #fdce37 !important;
+  }
+
+  .nav-pills .nav-link.active .text-white,
+  .nav-pills .show>.nav-link .text-white{
+    color: #271549 !important;
   }
 
   .schedule {
