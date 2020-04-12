@@ -325,11 +325,11 @@
             <input type="text" class="form-control" v-model="newTel" placeholder="prenom.nom" required>
             <hr>
             <p>
-              <i class="fas fa-info-circle text-epsi-yellow"></i> EDT EPSI (<a href="https://edt-epsi.app.web">edt-epsi.app.web</a>) est un projet étudiant. L'application n'est pas liée directement ou indirectement à l'EPSI (<a href="https://epsi.fr">epsi.fr</a>)
+              <i class="fas fa-info-circle text-epsi-yellow"></i> EDT EPSI (<a href="https://edt.epsi.best">edt.epsi.best</a>) est un projet étudiant. L'application n'est pas liée directement ou indirectement à l'EPSI (<a href="https://epsi.fr">epsi.fr</a>)
             </p>
             <hr>
             <p>
-              EDT EPSI - Version: 1.0.1
+              EDT EPSI - Version: 1.0.2
               <br>
               Pour toute demande, envoyer un mail à <a href="mailto:contact@epsi.best?subject=[EDT EPSI]">contact@epsi.best</a>
             </p>
