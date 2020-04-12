@@ -329,10 +329,17 @@
             </p>
             <hr>
             <p>
-              EDT EPSI - Version: 1.0.0
+              EDT EPSI - Version: 1.0.1
               <br>
               Pour toute demande, envoyer un mail à <a href="mailto:contact@epsi.best?subject=[EDT EPSI]">contact@epsi.best</a>
             </p>
+            <hr>
+            F.A.Q.
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <a href="https://support.google.com/chrome/answer/9658361?co=GENIE.Platform%3DDesktop&hl=fr" target="_blank"><i class="far fa-question-circle"></i> Comment installer l'application ?</a>
+              </li>
+            </ul>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-epsi-light" data-dismiss="modal" v-if="!modalIsRequired">Annuler</button>
@@ -551,6 +558,11 @@ export default {
     margin-top: -13px;
     background-color: white;
   }
+
+  .list-group-item:last-child {
+    border-bottom: none;
+  }
+
   @media (min-width: 992px) {
     .overlay .line {
       display: grid;
