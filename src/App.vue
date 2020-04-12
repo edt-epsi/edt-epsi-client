@@ -325,7 +325,7 @@
             <input type="text" class="form-control" v-model="newTel" placeholder="prenom.nom" required>
             <hr>
             <p>
-              <i class="fas fa-info-circle text-epsi-yellow"></i> EDT EPSI (<a href="https://edt-epsi.app.web">edt-epsi.app.web</a>) est un projet étudiant. L'application n'est pas liée directement ou indirectement à l'EPSI (<a href="https://epsi.fr">epsi.fr</a>)
+              <i class="fas fa-info-circle text-epsi-yellow"></i> EDT EPSI (<a href="https://edt.epsi.best">edt.epsi.best</a>) est un projet étudiant. L'application n'est pas liée directement ou indirectement à l'EPSI (<a href="https://epsi.fr">epsi.fr</a>)
             </p>
             <hr>
             <p>
