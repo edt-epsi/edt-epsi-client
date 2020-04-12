@@ -9,7 +9,7 @@
       <span class="navbar-text mr-auto text-white text-capitalize">{{ showMonthYear }}</span>
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link text-white" href="#" data-toggle="modal" data-target="#configModal"><i class="fas fa-cog"></i></a>
+          <a class="nav-link text-white" href="#" data-toggle="modal" data-target="#configModal" @click="loadConfig"><i class="fas fa-cog"></i></a>
         </li>
       </ul>
     </nav>
@@ -315,12 +315,26 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="configModalLabel">Configuration</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" v-if="!modalIsRequired">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
           <div class="modal-body">
-            <input type="text" class="form-control" v-model="newTel" placeholder="prenom.nom">
+            <input type="text" class="form-control" v-model="newTel" placeholder="prenom.nom" required>
+            <hr>
+            <p>
+              <i class="fas fa-info-circle text-epsi-yellow"></i> EDT EPSI (<a href="https://edt-epsi.app.web">edt-epsi.app.web</a>) est un projet étudiant. L'application n'est pas liée directement ou indirectement à l'EPSI (<a href="https://epsi.fr">epsi.fr</a>)
+            </p>
+            <hr>
+            <p>
+              EDT EPSI - Version: 1.0.0
+              <br>
+              Pour toute demande, envoyer un mail à <a href="mailto:contact@epsi.best?subject=[EDT EPSI]">contact@epsi.best</a>
+            </p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-info" data-dismiss="modal" @click="persistTel">Enregistrer</button>
+            <button type="button" class="btn btn-epsi-light" data-dismiss="modal" v-if="!modalIsRequired">Annuler</button>
+            <button type="button" class="btn btn-epsi-yellow text-epsi-dark" @click.prevent="persistTel">Enregistrer</button>
           </div>
         </div>
       </div>
@@ -370,6 +384,9 @@ export default {
     },
     showFriday () {
       return this.startWeekDate.plus({ day: 4 })
+    },
+    modalIsRequired () {
+      return this.tel === ''
     }
   },
   methods: {
@@ -392,8 +409,11 @@ export default {
       return this.showDate.day === date.day
     },
     persistTel () {
-      this.tel = window.localStorage.tel = this.newTel
-      this.loadData()
+      if (this.newTel !== '') {
+        window.$('#configModal').modal('hide')
+        this.tel = window.localStorage.tel = this.newTel
+        this.loadData()
+      }
     },
     predictStartEnd (course) {
       let debut = course.debut.split(':')[0]
@@ -411,6 +431,9 @@ export default {
         }, (response) => {
           console.error(response)
         })
+    },
+    loadConfig () {
+      this.newTel = this.tel
     }
   },
   mounted () {
@@ -428,7 +451,7 @@ export default {
       }
     })
 
-    if (window.localStorage.tel) {
+    if (window.localStorage.tel && window.localStorage.tel !== '') {
       this.newTel = this.tel = window.localStorage.tel
       this.loadData()
     } else {
