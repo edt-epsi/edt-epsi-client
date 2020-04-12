@@ -375,6 +375,7 @@ export default {
   methods: {
     resetDate () {
       this.showDate = window.DateTime.local()
+      this.loadData()
     },
     prevWeek () {
       this.showDate = this.showDate.plus({weeks: -1}).endOf('week').plus({days: -2})
