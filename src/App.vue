@@ -325,7 +325,7 @@
         </div>
       </div>
     </div>
-    <div class="loader" v-if="loading">
+    <div class="loader" v-if="loading !== 0">
       <i class="fas fa-spinner fa-spin"></i>
     </div>
   </div>
@@ -340,12 +340,13 @@ export default {
       showDate: window.DateTime.local(),
       tel: '',
       newTel: '',
-      loading: false,
+      loading: 0,
       mondayCourses: [],
       tuesdayCourses: [],
       wednesdayCourses: [],
       thursdayCourses: [],
-      fridayCourses: []
+      fridayCourses: [],
+      previousRequest: null
     }
   },
   computed: {
@@ -413,11 +414,16 @@ export default {
   },
   mounted () {
     this.$weekCourses = this.$resource('{tel}{/date}', {}, {}, {
-      before: () => {
-        this.loading = true
+      before: (request) => {
+        this.loading++
+        if (this.previousRequest) {
+          this.previousRequest.abort()
+        }
+
+        this.previousRequest = request
       },
       after: () => {
-        this.loading = false
+        this.loading--
       }
     })
 
