@@ -68,241 +68,243 @@
       </nav>
     </section>
     <main class="container-fluid pt-4 px-custom-0 container-schedule">
-      <div class="overlay">
-        <div class="line">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
+      <div>
+        <div class="overlay">
+          <div class="line">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          <div class="line">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          <div class="line">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          <div class="line">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          <div class="line">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          <div class="line">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          <div class="line">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          <div class="line">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          <div class="line">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          <div class="line">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          <div class="line">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          <div class="line">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          <div class="line">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
         </div>
-        <div class="line">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-        <div class="line">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-        <div class="line">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-        <div class="line">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-        <div class="line">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-        <div class="line">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-        <div class="line">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-        <div class="line">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-        <div class="line">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-        <div class="line">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-        <div class="line">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-        <div class="line">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-      </div>
-      <div class="schedule">
-        <div class="sc-head text-center">
-          <div>8h</div>
-          <div>9h</div>
-          <div>10h</div>
-          <div>11h</div>
-          <div>12h</div>
-          <div>13h</div>
-          <div>14h</div>
-          <div>15h</div>
-          <div>16h</div>
-          <div>17h</div>
-          <div>18h</div>
-          <div>19h</div>
-          <div>20h</div>
-        </div>
-        <div class="sc-monday" :class="{ active: hasSelect(showMonday) }">
-          <div class="text-white bg-epsi-light p-3" v-for="course in mondayCourses" :class="predictStartEnd(course)">
-            <div class="row">
-              <div class="col-auto mr-auto">
+        <div class="schedule">
+          <div class="sc-head text-center">
+            <div>8h</div>
+            <div>9h</div>
+            <div>10h</div>
+            <div>11h</div>
+            <div>12h</div>
+            <div>13h</div>
+            <div>14h</div>
+            <div>15h</div>
+            <div>16h</div>
+            <div>17h</div>
+            <div>18h</div>
+            <div>19h</div>
+            <div>20h</div>
+          </div>
+          <div class="sc-monday" :class="{ active: hasSelect(showMonday) }">
+            <div class="text-white bg-epsi-light p-3" v-for="course in mondayCourses" :class="predictStartEnd(course)">
+              <div class="row">
+                <div class="col-auto mr-auto">
                 <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
                     {{ course.debut.split(':')[0] }}h - {{ course.fin.split(':')[0] }}h
                 </span>
-              </div>
-              <div class="col-auto">
+                </div>
+                <div class="col-auto">
                 <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
                     {{ course.salle }}
                 </span>
+                </div>
               </div>
-            </div>
-            <div class="row mt-2">
-              <div class="col">
-                <p class="h5">
-                  {{ course.matiere }}
-                </p>
-                <p>
-                  {{ course.prof }}
-                </p>
+              <div class="row mt-2">
+                <div class="col">
+                  <p class="h5">
+                    {{ course.matiere }}
+                  </p>
+                  <p>
+                    {{ course.prof }}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="sc-tuesday" :class="{ active: hasSelect(showTuesday) }">
-          <div class="text-white bg-epsi-light p-3" v-for="course in tuesdayCourses" :class="predictStartEnd(course)">
-            <div class="row">
-              <div class="col-auto mr-auto">
+          <div class="sc-tuesday" :class="{ active: hasSelect(showTuesday) }">
+            <div class="text-white bg-epsi-light p-3" v-for="course in tuesdayCourses" :class="predictStartEnd(course)">
+              <div class="row">
+                <div class="col-auto mr-auto">
                 <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
                     {{ course.debut.split(':')[0] }}h - {{ course.fin.split(':')[0] }}h
                 </span>
-              </div>
-              <div class="col-auto">
+                </div>
+                <div class="col-auto">
                 <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
                     {{ course.salle }}
                 </span>
+                </div>
               </div>
-            </div>
-            <div class="row mt-2">
-              <div class="col">
-                <p class="h5">
-                  {{ course.matiere }}
-                </p>
-                <p>
-                  {{ course.prof }}
-                </p>
+              <div class="row mt-2">
+                <div class="col">
+                  <p class="h5">
+                    {{ course.matiere }}
+                  </p>
+                  <p>
+                    {{ course.prof }}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="sc-wednesday" :class="{ active: hasSelect(showWednesday) }">
-          <div class="text-white bg-epsi-light p-3" v-for="course in wednesdayCourses" :class="predictStartEnd(course)">
-            <div class="row">
-              <div class="col-auto mr-auto">
+          <div class="sc-wednesday" :class="{ active: hasSelect(showWednesday) }">
+            <div class="text-white bg-epsi-light p-3" v-for="course in wednesdayCourses" :class="predictStartEnd(course)">
+              <div class="row">
+                <div class="col-auto mr-auto">
                 <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
                     {{ course.debut.split(':')[0] }}h - {{ course.fin.split(':')[0] }}h
                 </span>
-              </div>
-              <div class="col-auto">
+                </div>
+                <div class="col-auto">
                 <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
                     {{ course.salle }}
                 </span>
+                </div>
               </div>
-            </div>
-            <div class="row mt-2">
-              <div class="col">
-                <p class="h5">
-                  {{ course.matiere }}
-                </p>
-                <p>
-                  {{ course.prof }}
-                </p>
+              <div class="row mt-2">
+                <div class="col">
+                  <p class="h5">
+                    {{ course.matiere }}
+                  </p>
+                  <p>
+                    {{ course.prof }}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="sc-thursday" :class="{ active: hasSelect(showThursday) }">
-          <div class="text-white bg-epsi-light p-3" v-for="course in thursdayCourses" :class="predictStartEnd(course)">
-            <div class="row">
-              <div class="col-auto mr-auto">
+          <div class="sc-thursday" :class="{ active: hasSelect(showThursday) }">
+            <div class="text-white bg-epsi-light p-3" v-for="course in thursdayCourses" :class="predictStartEnd(course)">
+              <div class="row">
+                <div class="col-auto mr-auto">
                 <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
                     {{ course.debut.split(':')[0] }}h - {{ course.fin.split(':')[0] }}h
                 </span>
-              </div>
-              <div class="col-auto">
+                </div>
+                <div class="col-auto">
                 <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
                     {{ course.salle }}
                 </span>
+                </div>
               </div>
-            </div>
-            <div class="row mt-2">
-              <div class="col">
-                <p class="h5">
-                  {{ course.matiere }}
-                </p>
-                <p>
-                  {{ course.prof }}
-                </p>
+              <div class="row mt-2">
+                <div class="col">
+                  <p class="h5">
+                    {{ course.matiere }}
+                  </p>
+                  <p>
+                    {{ course.prof }}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="sc-friday" :class="{ active: hasSelect(showFriday) }">
-          <div class="text-white bg-epsi-light p-3" v-for="course in fridayCourses" :class="predictStartEnd(course)">
-            <div class="row">
-              <div class="col-auto mr-auto">
+          <div class="sc-friday" :class="{ active: hasSelect(showFriday) }">
+            <div class="text-white bg-epsi-light p-3" v-for="course in fridayCourses" :class="predictStartEnd(course)">
+              <div class="row">
+                <div class="col-auto mr-auto">
                 <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
                     {{ course.debut.split(':')[0] }}h - {{ course.fin.split(':')[0] }}h
                 </span>
-              </div>
-              <div class="col-auto">
+                </div>
+                <div class="col-auto">
                 <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
                     {{ course.salle }}
                 </span>
+                </div>
               </div>
-            </div>
-            <div class="row mt-2">
-              <div class="col">
-                <p class="h5">
-                  {{ course.matiere }}
-                </p>
-                <p>
-                  {{ course.prof }}
-                </p>
+              <div class="row mt-2">
+                <div class="col">
+                  <p class="h5">
+                    {{ course.matiere }}
+                  </p>
+                  <p>
+                    {{ course.prof }}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -327,10 +329,17 @@
             </p>
             <hr>
             <p>
-              EDT EPSI - Version: 1.0.0
+              EDT EPSI - Version: 1.0.1
               <br>
               Pour toute demande, envoyer un mail à <a href="mailto:contact@epsi.best?subject=[EDT EPSI]">contact@epsi.best</a>
             </p>
+            <hr>
+            F.A.Q.
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <a href="https://support.google.com/chrome/answer/9658361?co=GENIE.Platform%3DDesktop&hl=fr" target="_blank"><i class="far fa-question-circle"></i> Comment installer l'application ?</a>
+              </li>
+            </ul>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-epsi-light" data-dismiss="modal" v-if="!modalIsRequired">Annuler</button>
@@ -521,7 +530,16 @@ export default {
   .schedule > div,
   .overlay {
     display: grid;
-    grid-template-rows: repeat(12, 50px);
+    grid-template-rows: repeat(12, minmax(50px, 1fr)) 1px;
+  }
+
+  .overlay {
+    position: absolute;
+    top: 1.5rem;
+    left: 15px;
+    right: 15px;
+    bottom: 0px;
+    z-index: -1;
   }
 
   .overlay .line {
@@ -536,17 +554,15 @@ export default {
     position: relative;
   }
 
-  .sc-head {
+  .sc-head > div {
     margin-top: -13px;
     background-color: white;
   }
 
-  .container-schedule > div {
-    position: absolute;
-    top: 1.5rem;
-    left: 15px;
-    right: 15px;
+  .list-group-item:last-child {
+    border-bottom: none;
   }
+
   @media (min-width: 992px) {
     .overlay .line {
       display: grid;
