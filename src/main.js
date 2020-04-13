@@ -6,12 +6,16 @@ import { DateTime } from 'luxon'
 import Vue from 'vue'
 import App from './App'
 import VueResource from 'vue-resource'
+import VueAnalytics from 'vue-analytics'
 
 window.$ = jquery
 window.jQuery = jquery
 window.DateTime = DateTime
 
 Vue.use(VueResource)
+Vue.use(VueAnalytics, {
+  id: ' UA-61560031-3'
+})
 
 Vue.config.productionTip = false
 Vue.http.options.root = 'https://edt.mathiasughetto.fr/api/week'
