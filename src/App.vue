@@ -60,6 +60,14 @@
             <div class="col p-0 day">{{ showFriday.day }}<span class="d-none d-md-inline">/{{ showFriday.toFormat('LL') }}</span></div>
           </div>
         </a>
+        <a class="nav-item nav-link" :class="{ active: hasSelect(showSaturday), 'd-none': hasCoursesSaturday() }" href="#" @click.prevent="selectDate(showSaturday)">
+          <div class="row text-center text-white">
+            <div class="col p-0">S<span class="d-none d-md-inline">amedi</span></div>
+          </div>
+          <div class="row text-center text-white">
+            <div class="col p-0 day">{{ showSaturday.day }}<span class="d-none d-md-inline">/{{ showSaturday.toFormat('LL') }}</span></div>
+          </div>
+        </a>
         <a class="nav-item nav-link mw-50" href="#" @click.prevent="nextWeek">
           <div class="row text-center text-white h-100">
             <div class="col p-0 align-self-center"><i class="fas fa-angle-right"></i></div>
@@ -68,7 +76,7 @@
       </nav>
     </section>
     <main class="container-fluid pt-4 px-custom-0 container-schedule">
-      <div>
+      <div :class="{ 'hasSaturday': !hasCoursesSaturday() }">
         <div class="overlay">
           <div class="line">
             <div></div>
@@ -76,6 +84,7 @@
             <div></div>
             <div></div>
             <div></div>
+            <div :class="{ 'd-none': hasCoursesSaturday() }"></div>
           </div>
           <div class="line">
             <div></div>
@@ -83,6 +92,7 @@
             <div></div>
             <div></div>
             <div></div>
+            <div :class="{ 'd-none': hasCoursesSaturday() }"></div>
           </div>
           <div class="line">
             <div></div>
@@ -90,6 +100,7 @@
             <div></div>
             <div></div>
             <div></div>
+            <div :class="{ 'd-none': hasCoursesSaturday() }"></div>
           </div>
           <div class="line">
             <div></div>
@@ -97,6 +108,7 @@
             <div></div>
             <div></div>
             <div></div>
+            <div :class="{ 'd-none': hasCoursesSaturday() }"></div>
           </div>
           <div class="line">
             <div></div>
@@ -104,6 +116,7 @@
             <div></div>
             <div></div>
             <div></div>
+            <div :class="{ 'd-none': hasCoursesSaturday() }"></div>
           </div>
           <div class="line">
             <div></div>
@@ -111,6 +124,7 @@
             <div></div>
             <div></div>
             <div></div>
+            <div :class="{ 'd-none': hasCoursesSaturday() }"></div>
           </div>
           <div class="line">
             <div></div>
@@ -118,6 +132,7 @@
             <div></div>
             <div></div>
             <div></div>
+            <div :class="{ 'd-none': hasCoursesSaturday() }"></div>
           </div>
           <div class="line">
             <div></div>
@@ -125,6 +140,7 @@
             <div></div>
             <div></div>
             <div></div>
+            <div :class="{ 'd-none': hasCoursesSaturday() }"></div>
           </div>
           <div class="line">
             <div></div>
@@ -132,6 +148,7 @@
             <div></div>
             <div></div>
             <div></div>
+            <div :class="{ 'd-none': hasCoursesSaturday() }"></div>
           </div>
           <div class="line">
             <div></div>
@@ -139,6 +156,7 @@
             <div></div>
             <div></div>
             <div></div>
+            <div :class="{ 'd-none': hasCoursesSaturday() }"></div>
           </div>
           <div class="line">
             <div></div>
@@ -146,6 +164,7 @@
             <div></div>
             <div></div>
             <div></div>
+            <div :class="{ 'd-none': hasCoursesSaturday() }"></div>
           </div>
           <div class="line">
             <div></div>
@@ -153,6 +172,7 @@
             <div></div>
             <div></div>
             <div></div>
+            <div :class="{ 'd-none': hasCoursesSaturday() }"></div>
           </div>
           <div class="line">
             <div></div>
@@ -160,6 +180,7 @@
             <div></div>
             <div></div>
             <div></div>
+            <div :class="{ 'd-none': hasCoursesSaturday() }"></div>
           </div>
         </div>
         <div class="schedule">
@@ -308,6 +329,32 @@
               </div>
             </div>
           </div>
+          <div class="sc-saturday" :class="{ active: hasSelect(showSaturday), 'd-none': hasCoursesSaturday() }">
+            <div class="text-white bg-epsi-light p-3" v-for="course in saturdayCourses" :class="predictStartEnd(course)">
+              <div class="row">
+                <div class="col-auto mr-auto">
+                <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
+                    {{ course.debut.split(':')[0] }}h - {{ course.fin.split(':')[0] }}h
+                </span>
+                </div>
+                <div class="col-auto">
+                <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
+                    {{ course.salle }}
+                </span>
+                </div>
+              </div>
+              <div class="row mt-2">
+                <div class="col">
+                  <p class="h5">
+                    {{ course.matiere }}
+                  </p>
+                  <p>
+                    {{ course.prof }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </main>
@@ -369,6 +416,7 @@ export default {
       wednesdayCourses: [],
       thursdayCourses: [],
       fridayCourses: [],
+      saturdayCourses: [],
       previousRequest: null
     }
   },
@@ -394,6 +442,9 @@ export default {
     showFriday () {
       return this.startWeekDate.plus({ day: 4 })
     },
+    showSaturday () {
+      return this.startWeekDate.plus({ day: 5 })
+    },
     modalIsRequired () {
       return this.tel === ''
     }
@@ -417,6 +468,9 @@ export default {
     hasSelect (date) {
       return this.showDate.day === date.day
     },
+    hasCoursesSaturday () {
+      return this.saturdayCourses.length === 0
+    },
     persistTel () {
       if (this.newTel !== '') {
         window.$('#configModal').modal('hide')
@@ -437,6 +491,7 @@ export default {
           this.wednesdayCourses = response.data[2].courses
           this.thursdayCourses = response.data[3].courses
           this.fridayCourses = response.data[4].courses
+          this.saturdayCourses = response.data[5].courses
         }, (response) => {
           console.error(response)
         })
@@ -527,6 +582,10 @@ export default {
     grid-template-columns: 50px repeat(5, 1fr) 50px;
   }
 
+  .hasSaturday .schedule {
+    grid-template-columns: 50px repeat(6, 1fr) 50px;
+  }
+
   .schedule > div,
   .overlay {
     display: grid;
@@ -569,6 +628,10 @@ export default {
       grid-template-columns: repeat(5, 1fr);
     }
 
+    .hasSaturday .overlay .line {
+      grid-template-columns: repeat(6, 1fr);
+    }
+
     .overlay .line>div {
       border-right: 1px solid #fdce37;
       border-left: 1px solid #fdce37;
@@ -578,7 +641,15 @@ export default {
       border-left: none;
     }
 
-    .overlay .line>div:last-child {
+    .overlay .line>div:nth-last-child(-n+2) {
+      border-right: none;
+    }
+
+    .hasSaturday .overlay .line>div:nth-last-child(-n+2) {
+      border-right: 1px solid #fdce37;
+    }
+
+    .hasSaturday .overlay .line>div:last-child {
       border-right: none;
     }
   }
@@ -593,7 +664,8 @@ export default {
       padding-right: 0;
     }
 
-    .schedule {
+    .schedule,
+    .hasSaturday .schedule {
       display: grid;
       column-gap: 2px;
       grid-template-columns: 50px auto;
