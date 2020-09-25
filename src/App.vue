@@ -280,7 +280,7 @@
             </p>
             <hr>
             <p>
-              EDT EPSI - Version: 1.0.5
+              EDT EPSI - Version: 1.1.0
               <br>
               Pour toute demande, envoyer un mail à <a href="mailto:contact@epsi.best?subject=[EDT EPSI]">contact@epsi.best</a>
             </p>
