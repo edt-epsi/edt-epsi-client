@@ -66,103 +66,7 @@
     <main class="container-fluid pt-4 px-custom-0 container-schedule">
       <div :class="{ 'hasSaturday': !hasCoursesSaturday() }">
         <div class="overlay">
-          <div class="line">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div :class="{ 'd-none': hasCoursesSaturday() }"></div>
-          </div>
-          <div class="line">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div :class="{ 'd-none': hasCoursesSaturday() }"></div>
-          </div>
-          <div class="line">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div :class="{ 'd-none': hasCoursesSaturday() }"></div>
-          </div>
-          <div class="line">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div :class="{ 'd-none': hasCoursesSaturday() }"></div>
-          </div>
-          <div class="line">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div :class="{ 'd-none': hasCoursesSaturday() }"></div>
-          </div>
-          <div class="line">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div :class="{ 'd-none': hasCoursesSaturday() }"></div>
-          </div>
-          <div class="line">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div :class="{ 'd-none': hasCoursesSaturday() }"></div>
-          </div>
-          <div class="line">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div :class="{ 'd-none': hasCoursesSaturday() }"></div>
-          </div>
-          <div class="line">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div :class="{ 'd-none': hasCoursesSaturday() }"></div>
-          </div>
-          <div class="line">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div :class="{ 'd-none': hasCoursesSaturday() }"></div>
-          </div>
-          <div class="line">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div :class="{ 'd-none': hasCoursesSaturday() }"></div>
-          </div>
-          <div class="line">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div :class="{ 'd-none': hasCoursesSaturday() }"></div>
-          </div>
-          <div class="line">
+          <div v-for="n in 49" class="line">
             <div></div>
             <div></div>
             <div></div>
@@ -188,11 +92,11 @@
             <div>20h</div>
           </div>
           <div class="sc-monday" :class="{ active: hasSelect(showMonday) }">
-            <div class="text-white bg-epsi-light p-3" v-for="course in mondayCourses" :class="predictStartEnd(course)">
+            <div class="text-white bg-epsi-light p-3" v-for="course in mondayCourses" :style="predictStartEnd(course)">
               <div class="row">
                 <div class="col-auto mr-auto">
                 <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
-                    {{ course.debut.split(':')[0] }}h - {{ course.fin.split(':')[0] }}h
+                    {{ course.debut.split(':')[0] }}h{{ course.debut.split(':')[1] }} - {{ course.fin.split(':')[0] }}h{{ course.fin.split(':')[1] }}
                 </span>
                 </div>
                 <div class="col-auto">
@@ -214,11 +118,11 @@
             </div>
           </div>
           <div class="sc-tuesday" :class="{ active: hasSelect(showTuesday) }">
-            <div class="text-white bg-epsi-light p-3" v-for="course in tuesdayCourses" :class="predictStartEnd(course)">
+            <div class="text-white bg-epsi-light p-3" v-for="course in tuesdayCourses" :style="predictStartEnd(course)">
               <div class="row">
                 <div class="col-auto mr-auto">
                 <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
-                    {{ course.debut.split(':')[0] }}h - {{ course.fin.split(':')[0] }}h
+                    {{ course.debut.split(':')[0] }}h{{ course.debut.split(':')[1] }} - {{ course.fin.split(':')[0] }}h{{ course.fin.split(':')[1] }}
                 </span>
                 </div>
                 <div class="col-auto">
@@ -240,11 +144,11 @@
             </div>
           </div>
           <div class="sc-wednesday" :class="{ active: hasSelect(showWednesday) }">
-            <div class="text-white bg-epsi-light p-3" v-for="course in wednesdayCourses" :class="predictStartEnd(course)">
+            <div class="text-white bg-epsi-light p-3" v-for="course in wednesdayCourses" :style="predictStartEnd(course)">
               <div class="row">
                 <div class="col-auto mr-auto">
                 <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
-                    {{ course.debut.split(':')[0] }}h - {{ course.fin.split(':')[0] }}h
+                    {{ course.debut.split(':')[0] }}h{{ course.debut.split(':')[1] }} - {{ course.fin.split(':')[0] }}h{{ course.fin.split(':')[1] }}
                 </span>
                 </div>
                 <div class="col-auto">
@@ -266,11 +170,11 @@
             </div>
           </div>
           <div class="sc-thursday" :class="{ active: hasSelect(showThursday) }">
-            <div class="text-white bg-epsi-light p-3" v-for="course in thursdayCourses" :class="predictStartEnd(course)">
+            <div class="text-white bg-epsi-light p-3" v-for="course in thursdayCourses" :style="predictStartEnd(course)">
               <div class="row">
                 <div class="col-auto mr-auto">
                 <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
-                    {{ course.debut.split(':')[0] }}h - {{ course.fin.split(':')[0] }}h
+                    {{ course.debut.split(':')[0] }}h{{ course.debut.split(':')[1] }} - {{ course.fin.split(':')[0] }}h{{ course.fin.split(':')[1] }}
                 </span>
                 </div>
                 <div class="col-auto">
@@ -292,11 +196,11 @@
             </div>
           </div>
           <div class="sc-friday" :class="{ active: hasSelect(showFriday) }">
-            <div class="text-white bg-epsi-light p-3" v-for="course in fridayCourses" :class="predictStartEnd(course)">
+            <div class="text-white bg-epsi-light p-3" v-for="course in fridayCourses" :style="predictStartEnd(course)">
               <div class="row">
                 <div class="col-auto mr-auto">
                 <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
-                    {{ course.debut.split(':')[0] }}h - {{ course.fin.split(':')[0] }}h
+                    {{ course.debut.split(':')[0] }}h{{ course.debut.split(':')[1] }} - {{ course.fin.split(':')[0] }}h{{ course.fin.split(':')[1] }}
                 </span>
                 </div>
                 <div class="col-auto">
@@ -318,11 +222,11 @@
             </div>
           </div>
           <div class="sc-saturday" :class="{ active: hasSelect(showSaturday), 'd-none': hasCoursesSaturday() }">
-            <div class="text-white bg-epsi-light p-3" v-for="course in saturdayCourses" :class="predictStartEnd(course)">
+            <div class="text-white bg-epsi-light p-3" v-for="course in saturdayCourses" :style="predictStartEnd(course)">
               <div class="row">
                 <div class="col-auto mr-auto">
                 <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
-                    {{ course.debut.split(':')[0] }}h - {{ course.fin.split(':')[0] }}h
+                    {{ course.debut.split(':')[0] }}h{{ course.debut.split(':')[1] }} - {{ course.fin.split(':')[0] }}h{{ course.fin.split(':')[1] }}
                 </span>
                 </div>
                 <div class="col-auto">
@@ -364,7 +268,7 @@
             </p>
             <hr>
             <p>
-              EDT EPSI - Version: 1.0.5
+              EDT EPSI - Version: 1.1.0
               <br>
               Pour toute demande, envoyer un mail à <a href="mailto:contact@epsi.best?subject=[EDT EPSI]">contact@epsi.best</a>
             </p>
@@ -470,9 +374,15 @@ export default {
       }
     },
     predictStartEnd (course) {
-      let debut = course.debut.split(':')[0]
-      let fin = course.fin.split(':')[0]
-      return 'start-' + parseInt(debut) + ' end-' + parseInt(fin)
+      let debutHour = parseInt(course.debut.split(':')[0])
+      let debutMin = parseInt(course.debut.split(':')[1])
+      let finHour = parseInt(course.fin.split(':')[0])
+      let finMin = parseInt(course.fin.split(':')[1])
+
+      let debut = (debutHour - 8) * 4 + (debutMin === 15 ? 2 : debutMin === 30 ? 3 : debutMin === 45 ? 4 : 1)
+      let fin = (finHour - 8) * 4 + (finMin === 15 ? 2 : finMin === 30 ? 3 : finMin === 45 ? 4 : 1)
+
+      return 'grid-row-start:' + debut + '; grid-row-end:' + fin + ';'
     },
     loadData () {
       this.$weekCourses.query({tel: this.tel, date: this.showDate.toFormat('d-MM-yyyy')})
@@ -516,7 +426,6 @@ export default {
 }
 </script>
 
-<style src="./grids.scss"></style>
 <style lang="scss">
 
   $theme-colors: (
@@ -580,6 +489,10 @@ export default {
   .schedule > div,
   .overlay {
     display: grid;
+    grid-template-rows: repeat(48, minmax(12.5px, 1fr)) 1px;
+  }
+
+  .schedule .sc-head {
     grid-template-rows: repeat(12, minmax(50px, 1fr)) 1px;
   }
 
@@ -594,10 +507,12 @@ export default {
 
   .overlay .line {
     height: 100%;
-    border-top: 1px solid #dee2e6;
     width: 100%;
     padding-left: 50px;
     padding-right: 50px;
+  }
+  .overlay .line:nth-child(4n + 1) {
+    border-top: 1px solid #dee2e6;
   }
 
   .container-schedule {
