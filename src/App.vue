@@ -1,18 +1,6 @@
 <template>
   <div id="app">
-    <nav class="navbar navbar-dark bg-epsi-dark fixed-top">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link text-white" href="#" @click.prevent="resetDate"><i class="fas fa-sync"></i></a>
-        </li>
-      </ul>
-      <span class="navbar-text mr-auto text-white text-capitalize">{{ showMonthYear }}</span>
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link text-white" href="#" data-toggle="modal" data-target="#configModal" @click="loadConfig"><i class="fas fa-cog"></i></a>
-        </li>
-      </ul>
-    </nav>
+    <Navbar :show-month-year=showMonthYear :reset-date=resetDate :load-config=loadConfig />
     <section class="container-fluid py-2 bg-epsi-dark px-custom-0 fixed-top">
       <nav class="nav nav-pills nav-justified">
         <a class="nav-item nav-link mw-50" href="#" @click.prevent="prevWeek">
@@ -306,9 +294,12 @@
 </template>
 
 <script>
-
+import Navbar from '@/components/navbar'
 export default {
   name: 'app',
+  components: {
+    Navbar
+  },
   data () {
     return {
       showDate: window.DateTime.local(),
