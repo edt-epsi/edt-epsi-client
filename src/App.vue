@@ -8,54 +8,17 @@
             <div class="col p-0 align-self-center"><i class="fas fa-angle-left"></i></div>
           </div>
         </a>
-        <a class="nav-item nav-link" :class="{ active: hasSelect(showMonday) }" href="#" @click.prevent="selectDate(showMonday)">
-          <div class="row text-center text-white">
-            <div class="col p-0">L<span class="d-none d-md-inline">undi</span></div>
-          </div>
-          <div class="row text-center text-white">
-            <div class="col p-0 day">{{ showMonday.day }}<span class="d-none d-md-inline">/{{ showMonday.toFormat('LL') }}</span></div>
-          </div>
-        </a>
-        <a class="nav-item nav-link" :class="{ active: hasSelect(showTuesday) }" href="#" @click.prevent="selectDate(showTuesday)">
-          <div class="row text-center text-white">
-            <div class="col p-0">M<span class="d-none d-md-inline">ardi</span></div>
-          </div>
-          <div class="row text-center text-white">
-            <div class="col p-0 day">{{ showTuesday.day }}<span class="d-none d-md-inline">/{{ showTuesday.toFormat('LL') }}</span></div>
-          </div>
-        </a>
-        <a class="nav-item nav-link" :class="{ active: hasSelect(showWednesday) }" href="#" @click.prevent="selectDate(showWednesday)">
-          <div class="row text-center text-white">
-            <div class="col p-0">M<span class="d-none d-md-inline">ercredi</span></div>
-          </div>
-          <div class="row text-center text-white">
-            <div class="col p-0 day">{{ showWednesday.day }}<span class="d-none d-md-inline">/{{ showWednesday.toFormat('LL') }}</span></div>
-          </div>
-        </a>
-        <a class="nav-item nav-link" :class="{ active: hasSelect(showThursday) }" href="#" @click.prevent="selectDate(showThursday)">
-          <div class="row text-center text-white">
-            <div class="col p-0">J<span class="d-none d-md-inline">eudi</span></div>
-          </div>
-          <div class="row text-center text-white">
-            <div class="col p-0 day">{{ showThursday.day }}<span class="d-none d-md-inline">/{{ showThursday.toFormat('LL') }}</span></div>
-          </div>
-        </a>
-        <a class="nav-item nav-link" :class="{ active: hasSelect(showFriday) }" href="#" @click.prevent="selectDate(showFriday)">
-          <div class="row text-center text-white">
-            <div class="col p-0">V<span class="d-none d-md-inline">endredi</span></div>
-          </div>
-          <div class="row text-center text-white">
-            <div class="col p-0 day">{{ showFriday.day }}<span class="d-none d-md-inline">/{{ showFriday.toFormat('LL') }}</span></div>
-          </div>
-        </a>
-        <a class="nav-item nav-link" :class="{ active: hasSelect(showSaturday), 'd-none': hasCoursesSaturday() }" href="#" @click.prevent="selectDate(showSaturday)">
+        <template v-for="index in hasCoursesSaturday() ? 5 : 6">
+          <ShowDay v-bind:key=index :show-date=startWeekDate :date-of-the-week=index :select-date=selectDate :has-select=hasSelect />
+        </template>
+        <!-- <a class="nav-item nav-link" :class="{ active: hasSelect(showSaturday), 'd-none': hasCoursesSaturday() }" href="#" @click.prevent="selectDate(showSaturday)">
           <div class="row text-center text-white">
             <div class="col p-0">S<span class="d-none d-md-inline">amedi</span></div>
           </div>
           <div class="row text-center text-white">
             <div class="col p-0 day">{{ showSaturday.day }}<span class="d-none d-md-inline">/{{ showSaturday.toFormat('LL') }}</span></div>
           </div>
-        </a>
+        </a> -->
         <a class="nav-item nav-link mw-50" href="#" @click.prevent="nextWeek">
           <div class="row text-center text-white h-100">
             <div class="col p-0 align-self-center"><i class="fas fa-angle-right"></i></div>
@@ -295,10 +258,13 @@
 
 <script>
 import Navbar from '@/components/navbar'
+import ShowDay from '@/components/showday'
+
 export default {
   name: 'app',
   components: {
-    Navbar
+    Navbar,
+    ShowDay
   },
   data () {
     return {
