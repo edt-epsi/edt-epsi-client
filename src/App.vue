@@ -32,19 +32,9 @@
         </div>
         <div class="schedule">
           <div class="sc-head text-center">
-            <div>8h</div>
-            <div>9h</div>
-            <div>10h</div>
-            <div>11h</div>
-            <div>12h</div>
-            <div>13h</div>
-            <div>14h</div>
-            <div>15h</div>
-            <div>16h</div>
-            <div>17h</div>
-            <div>18h</div>
-            <div>19h</div>
-            <div>20h</div>
+            <div v-for="n in 13" v-bind:key=n>
+                {{ ('0' + (n + 7)).slice(-2) }}h
+            </div>
           </div>
           <div class="sc-monday" :class="{ active: hasSelect(showMonday) }">
             <div class="text-white bg-epsi-light p-3" v-for="course in mondayCourses" :style="predictStartEnd(course)">
