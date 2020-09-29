@@ -11,14 +11,6 @@
         <template v-for="index in hasCoursesSaturday() ? 5 : 6">
           <ShowDay v-bind:key=index :show-date=startWeekDate :date-of-the-week=index :select-date=selectDate :has-select=hasSelect />
         </template>
-        <!-- <a class="nav-item nav-link" :class="{ active: hasSelect(showSaturday), 'd-none': hasCoursesSaturday() }" href="#" @click.prevent="selectDate(showSaturday)">
-          <div class="row text-center text-white">
-            <div class="col p-0">S<span class="d-none d-md-inline">amedi</span></div>
-          </div>
-          <div class="row text-center text-white">
-            <div class="col p-0 day">{{ showSaturday.day }}<span class="d-none d-md-inline">/{{ showSaturday.toFormat('LL') }}</span></div>
-          </div>
-        </a> -->
         <a class="nav-item nav-link mw-50" href="#" @click.prevent="nextWeek">
           <div class="row text-center text-white h-100">
             <div class="col p-0 align-self-center"><i class="fas fa-angle-right"></i></div>
