@@ -36,162 +36,9 @@
                 {{ ('0' + (n + 7)).slice(-2) }}h
             </div>
           </div>
-          <div class="sc-monday" :class="{ active: hasSelect(showMonday) }">
-            <div class="text-white bg-epsi-light p-3" v-for="course in mondayCourses" :style="predictStartEnd(course)">
-              <div class="row">
-                <div class="col-auto mr-auto">
-                <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
-                    {{ course.debut.split(':')[0] }}h{{ course.debut.split(':')[1] }} - {{ course.fin.split(':')[0] }}h{{ course.fin.split(':')[1] }}
-                </span>
-                </div>
-                <div class="col-auto">
-                <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
-                    {{ course.salle }}
-                </span>
-                </div>
-              </div>
-              <div class="row mt-2">
-                <div class="col">
-                  <p class="h5">
-                    {{ course.matiere }}
-                  </p>
-                  <p>
-                    {{ course.prof }}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="sc-tuesday" :class="{ active: hasSelect(showTuesday) }">
-            <div class="text-white bg-epsi-light p-3" v-for="course in tuesdayCourses" :style="predictStartEnd(course)">
-              <div class="row">
-                <div class="col-auto mr-auto">
-                <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
-                    {{ course.debut.split(':')[0] }}h{{ course.debut.split(':')[1] }} - {{ course.fin.split(':')[0] }}h{{ course.fin.split(':')[1] }}
-                </span>
-                </div>
-                <div class="col-auto">
-                <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
-                    {{ course.salle }}
-                </span>
-                </div>
-              </div>
-              <div class="row mt-2">
-                <div class="col">
-                  <p class="h5">
-                    {{ course.matiere }}
-                  </p>
-                  <p>
-                    {{ course.prof }}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="sc-wednesday" :class="{ active: hasSelect(showWednesday) }">
-            <div class="text-white bg-epsi-light p-3" v-for="course in wednesdayCourses" :style="predictStartEnd(course)">
-              <div class="row">
-                <div class="col-auto mr-auto">
-                <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
-                    {{ course.debut.split(':')[0] }}h{{ course.debut.split(':')[1] }} - {{ course.fin.split(':')[0] }}h{{ course.fin.split(':')[1] }}
-                </span>
-                </div>
-                <div class="col-auto">
-                <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
-                    {{ course.salle }}
-                </span>
-                </div>
-              </div>
-              <div class="row mt-2">
-                <div class="col">
-                  <p class="h5">
-                    {{ course.matiere }}
-                  </p>
-                  <p>
-                    {{ course.prof }}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="sc-thursday" :class="{ active: hasSelect(showThursday) }">
-            <div class="text-white bg-epsi-light p-3" v-for="course in thursdayCourses" :style="predictStartEnd(course)">
-              <div class="row">
-                <div class="col-auto mr-auto">
-                <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
-                    {{ course.debut.split(':')[0] }}h{{ course.debut.split(':')[1] }} - {{ course.fin.split(':')[0] }}h{{ course.fin.split(':')[1] }}
-                </span>
-                </div>
-                <div class="col-auto">
-                <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
-                    {{ course.salle }}
-                </span>
-                </div>
-              </div>
-              <div class="row mt-2">
-                <div class="col">
-                  <p class="h5">
-                    {{ course.matiere }}
-                  </p>
-                  <p>
-                    {{ course.prof }}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="sc-friday" :class="{ active: hasSelect(showFriday) }">
-            <div class="text-white bg-epsi-light p-3" v-for="course in fridayCourses" :style="predictStartEnd(course)">
-              <div class="row">
-                <div class="col-auto mr-auto">
-                <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
-                    {{ course.debut.split(':')[0] }}h{{ course.debut.split(':')[1] }} - {{ course.fin.split(':')[0] }}h{{ course.fin.split(':')[1] }}
-                </span>
-                </div>
-                <div class="col-auto">
-                <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
-                    {{ course.salle }}
-                </span>
-                </div>
-              </div>
-              <div class="row mt-2">
-                <div class="col">
-                  <p class="h5">
-                    {{ course.matiere }}
-                  </p>
-                  <p>
-                    {{ course.prof }}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="sc-saturday" :class="{ active: hasSelect(showSaturday), 'd-none': hasCoursesSaturday() }">
-            <div class="text-white bg-epsi-light p-3" v-for="course in saturdayCourses" :style="predictStartEnd(course)">
-              <div class="row">
-                <div class="col-auto mr-auto">
-                <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
-                    {{ course.debut.split(':')[0] }}h{{ course.debut.split(':')[1] }} - {{ course.fin.split(':')[0] }}h{{ course.fin.split(':')[1] }}
-                </span>
-                </div>
-                <div class="col-auto">
-                <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
-                    {{ course.salle }}
-                </span>
-                </div>
-              </div>
-              <div class="row mt-2">
-                <div class="col">
-                  <p class="h5">
-                    {{ course.matiere }}
-                  </p>
-                  <p>
-                    {{ course.prof }}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+          <template v-for="index in hasCoursesSaturday() ? 5 : 6" >
+            <Cours v-bind:key=index :courses=courses[index-1] :has-select=hasSelect show-monday=showMonday />
+          </template>
         </div>
       </div>
     </main>
@@ -241,12 +88,14 @@
 <script>
 import Navbar from '@/components/navbar'
 import ShowDay from '@/components/showday'
+import Cours from '@/components/cours'
 
 export default {
   name: 'app',
   components: {
     Navbar,
-    ShowDay
+    ShowDay,
+    Cours
   },
   data () {
     return {
@@ -260,6 +109,7 @@ export default {
       thursdayCourses: [],
       fridayCourses: [],
       saturdayCourses: [],
+      courses: [],
       previousRequest: null
     }
   },
@@ -341,6 +191,7 @@ export default {
           this.thursdayCourses = response.data[3].courses
           this.fridayCourses = response.data[4].courses
           this.saturdayCourses = response.data[5].courses
+          this.courses = response.data
         }, (response) => {
           console.error(response)
         })
