@@ -1,5 +1,5 @@
 <template>
-<div id='cours' >
+<div id='cours' :class="{ active: hasSelect(showDateObject) }">
   <div class="text-white bg-epsi-light p-3" v-for="(cour, n) in coursesOfTheDay" :key=n :style="predictStartEnd(cour)">
     <div class="row">
       <div class="col-auto mr-auto">
@@ -32,11 +32,15 @@
 export default {
   name: 'Cours',
   props: {
-    courses: Object
+    courses: Object,
+    hasSelect: Function,
+    showDate: Object,
+    dateOfTheWeek: Number
   },
   data () {
     return {
-      coursesOfTheDay: this.courses
+      coursesOfTheDay: this.courses,
+      showDateObject: {}
     }
   },
   watch: {
@@ -56,6 +60,9 @@ export default {
       let fin = (finHour - 8) * 4 + (finMin === 15 ? 2 : finMin === 30 ? 3 : finMin === 45 ? 4 : 1)
       return 'grid-row-start:' + debut + '; grid-row-end:' + fin + ';'
     }
+  },
+  beforeUpdate () {
+    this.showDateObject = this.showDate.plus({ day: this.dateOfTheWeek - 1 })
   }
 }
 </script>

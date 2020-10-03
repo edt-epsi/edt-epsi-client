@@ -37,7 +37,7 @@
             </div>
           </div>
           <template v-for="index in hasCoursesSaturday() ? 5 : 6" >
-            <Cours v-bind:key=index :courses=courses[index-1] :has-select=hasSelect show-monday=showMonday />
+            <Cours v-bind:key=index :courses=courses[index-1] :date-of-the-week=index :has-select=hasSelect :show-date=startWeekDate />
           </template>
         </div>
       </div>
