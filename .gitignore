@@ -12,5 +12,6 @@ yarn-error.log*
 *.njsproj
 *.sln
 
+.vscode/
 .firebase/
 deploy

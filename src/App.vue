@@ -1,18 +1,6 @@
 <template>
   <div id="app">
-    <nav class="navbar navbar-dark bg-epsi-dark fixed-top">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link text-white" href="#" @click.prevent="resetDate"><i class="fas fa-sync"></i></a>
-        </li>
-      </ul>
-      <span class="navbar-text mr-auto text-white text-capitalize">{{ showMonthYear }}</span>
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link text-white" href="#" data-toggle="modal" data-target="#configModal" @click="loadConfig"><i class="fas fa-cog"></i></a>
-        </li>
-      </ul>
-    </nav>
+    <Navbar :show-month-year=showMonthYear :reset-date=resetDate :load-config=loadConfig />
     <section class="container-fluid py-2 bg-epsi-dark px-custom-0 fixed-top">
       <nav class="nav nav-pills nav-justified">
         <a class="nav-item nav-link mw-50" href="#" @click.prevent="prevWeek">
@@ -20,54 +8,9 @@
             <div class="col p-0 align-self-center"><i class="fas fa-angle-left"></i></div>
           </div>
         </a>
-        <a class="nav-item nav-link" :class="{ active: hasSelect(showMonday) }" href="#" @click.prevent="selectDate(showMonday)">
-          <div class="row text-center text-white">
-            <div class="col p-0">L<span class="d-none d-md-inline">undi</span></div>
-          </div>
-          <div class="row text-center text-white">
-            <div class="col p-0 day">{{ showMonday.day }}<span class="d-none d-md-inline">/{{ showMonday.toFormat('LL') }}</span></div>
-          </div>
-        </a>
-        <a class="nav-item nav-link" :class="{ active: hasSelect(showTuesday) }" href="#" @click.prevent="selectDate(showTuesday)">
-          <div class="row text-center text-white">
-            <div class="col p-0">M<span class="d-none d-md-inline">ardi</span></div>
-          </div>
-          <div class="row text-center text-white">
-            <div class="col p-0 day">{{ showTuesday.day }}<span class="d-none d-md-inline">/{{ showTuesday.toFormat('LL') }}</span></div>
-          </div>
-        </a>
-        <a class="nav-item nav-link" :class="{ active: hasSelect(showWednesday) }" href="#" @click.prevent="selectDate(showWednesday)">
-          <div class="row text-center text-white">
-            <div class="col p-0">M<span class="d-none d-md-inline">ercredi</span></div>
-          </div>
-          <div class="row text-center text-white">
-            <div class="col p-0 day">{{ showWednesday.day }}<span class="d-none d-md-inline">/{{ showWednesday.toFormat('LL') }}</span></div>
-          </div>
-        </a>
-        <a class="nav-item nav-link" :class="{ active: hasSelect(showThursday) }" href="#" @click.prevent="selectDate(showThursday)">
-          <div class="row text-center text-white">
-            <div class="col p-0">J<span class="d-none d-md-inline">eudi</span></div>
-          </div>
-          <div class="row text-center text-white">
-            <div class="col p-0 day">{{ showThursday.day }}<span class="d-none d-md-inline">/{{ showThursday.toFormat('LL') }}</span></div>
-          </div>
-        </a>
-        <a class="nav-item nav-link" :class="{ active: hasSelect(showFriday) }" href="#" @click.prevent="selectDate(showFriday)">
-          <div class="row text-center text-white">
-            <div class="col p-0">V<span class="d-none d-md-inline">endredi</span></div>
-          </div>
-          <div class="row text-center text-white">
-            <div class="col p-0 day">{{ showFriday.day }}<span class="d-none d-md-inline">/{{ showFriday.toFormat('LL') }}</span></div>
-          </div>
-        </a>
-        <a class="nav-item nav-link" :class="{ active: hasSelect(showSaturday), 'd-none': hasCoursesSaturday() }" href="#" @click.prevent="selectDate(showSaturday)">
-          <div class="row text-center text-white">
-            <div class="col p-0">S<span class="d-none d-md-inline">amedi</span></div>
-          </div>
-          <div class="row text-center text-white">
-            <div class="col p-0 day">{{ showSaturday.day }}<span class="d-none d-md-inline">/{{ showSaturday.toFormat('LL') }}</span></div>
-          </div>
-        </a>
+        <template v-for="index in hasCoursesSaturday() ? 5 : 6">
+          <ShowDay v-bind:key=index :show-date=startWeekDate :date-of-the-week=index :select-date=selectDate :has-select=hasSelect />
+        </template>
         <a class="nav-item nav-link mw-50" href="#" @click.prevent="nextWeek">
           <div class="row text-center text-white h-100">
             <div class="col p-0 align-self-center"><i class="fas fa-angle-right"></i></div>
@@ -89,176 +32,13 @@
         </div>
         <div class="schedule">
           <div class="sc-head text-center">
-            <div>8h</div>
-            <div>9h</div>
-            <div>10h</div>
-            <div>11h</div>
-            <div>12h</div>
-            <div>13h</div>
-            <div>14h</div>
-            <div>15h</div>
-            <div>16h</div>
-            <div>17h</div>
-            <div>18h</div>
-            <div>19h</div>
-            <div>20h</div>
-          </div>
-          <div class="sc-monday" :class="{ active: hasSelect(showMonday) }">
-            <div class="text-white bg-epsi-light p-3" v-for="course in mondayCourses" :style="predictStartEnd(course)">
-              <div class="row">
-                <div class="col-auto mr-auto">
-                <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
-                    {{ course.debut.split(':')[0] }}h{{ course.debut.split(':')[1] }} - {{ course.fin.split(':')[0] }}h{{ course.fin.split(':')[1] }}
-                </span>
-                </div>
-                <div class="col-auto">
-                <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
-                    {{ course.salle }}
-                </span>
-                </div>
-              </div>
-              <div class="row mt-2">
-                <div class="col">
-                  <p class="h5">
-                    {{ course.matiere }}
-                  </p>
-                  <p>
-                    {{ course.prof }}
-                  </p>
-                </div>
-              </div>
+            <div v-for="n in 13" v-bind:key=n>
+                {{ ('0' + (n + 7)).slice(-2) }}h
             </div>
           </div>
-          <div class="sc-tuesday" :class="{ active: hasSelect(showTuesday) }">
-            <div class="text-white bg-epsi-light p-3" v-for="course in tuesdayCourses" :style="predictStartEnd(course)">
-              <div class="row">
-                <div class="col-auto mr-auto">
-                <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
-                    {{ course.debut.split(':')[0] }}h{{ course.debut.split(':')[1] }} - {{ course.fin.split(':')[0] }}h{{ course.fin.split(':')[1] }}
-                </span>
-                </div>
-                <div class="col-auto">
-                <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
-                    {{ course.salle }}
-                </span>
-                </div>
-              </div>
-              <div class="row mt-2">
-                <div class="col">
-                  <p class="h5">
-                    {{ course.matiere }}
-                  </p>
-                  <p>
-                    {{ course.prof }}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="sc-wednesday" :class="{ active: hasSelect(showWednesday) }">
-            <div class="text-white bg-epsi-light p-3" v-for="course in wednesdayCourses" :style="predictStartEnd(course)">
-              <div class="row">
-                <div class="col-auto mr-auto">
-                <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
-                    {{ course.debut.split(':')[0] }}h{{ course.debut.split(':')[1] }} - {{ course.fin.split(':')[0] }}h{{ course.fin.split(':')[1] }}
-                </span>
-                </div>
-                <div class="col-auto">
-                <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
-                    {{ course.salle }}
-                </span>
-                </div>
-              </div>
-              <div class="row mt-2">
-                <div class="col">
-                  <p class="h5">
-                    {{ course.matiere }}
-                  </p>
-                  <p>
-                    {{ course.prof }}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="sc-thursday" :class="{ active: hasSelect(showThursday) }">
-            <div class="text-white bg-epsi-light p-3" v-for="course in thursdayCourses" :style="predictStartEnd(course)">
-              <div class="row">
-                <div class="col-auto mr-auto">
-                <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
-                    {{ course.debut.split(':')[0] }}h{{ course.debut.split(':')[1] }} - {{ course.fin.split(':')[0] }}h{{ course.fin.split(':')[1] }}
-                </span>
-                </div>
-                <div class="col-auto">
-                <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
-                    {{ course.salle }}
-                </span>
-                </div>
-              </div>
-              <div class="row mt-2">
-                <div class="col">
-                  <p class="h5">
-                    {{ course.matiere }}
-                  </p>
-                  <p>
-                    {{ course.prof }}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="sc-friday" :class="{ active: hasSelect(showFriday) }">
-            <div class="text-white bg-epsi-light p-3" v-for="course in fridayCourses" :style="predictStartEnd(course)">
-              <div class="row">
-                <div class="col-auto mr-auto">
-                <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
-                    {{ course.debut.split(':')[0] }}h{{ course.debut.split(':')[1] }} - {{ course.fin.split(':')[0] }}h{{ course.fin.split(':')[1] }}
-                </span>
-                </div>
-                <div class="col-auto">
-                <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
-                    {{ course.salle }}
-                </span>
-                </div>
-              </div>
-              <div class="row mt-2">
-                <div class="col">
-                  <p class="h5">
-                    {{ course.matiere }}
-                  </p>
-                  <p>
-                    {{ course.prof }}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="sc-saturday" :class="{ active: hasSelect(showSaturday), 'd-none': hasCoursesSaturday() }">
-            <div class="text-white bg-epsi-light p-3" v-for="course in saturdayCourses" :style="predictStartEnd(course)">
-              <div class="row">
-                <div class="col-auto mr-auto">
-                <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
-                    {{ course.debut.split(':')[0] }}h{{ course.debut.split(':')[1] }} - {{ course.fin.split(':')[0] }}h{{ course.fin.split(':')[1] }}
-                </span>
-                </div>
-                <div class="col-auto">
-                <span class="badge badge-pill badge-epsi-yellow text-epsi-dark">
-                    {{ course.salle }}
-                </span>
-                </div>
-              </div>
-              <div class="row mt-2">
-                <div class="col">
-                  <p class="h5">
-                    {{ course.matiere }}
-                  </p>
-                  <p>
-                    {{ course.prof }}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+          <template v-for="index in hasCoursesSaturday() ? 5 : 6" >
+            <Cours v-bind:key=index :courses=courses[index-1] :date-of-the-week=index :has-select=hasSelect :show-date=startWeekDate />
+          </template>
         </div>
       </div>
     </main>
@@ -306,9 +86,17 @@
 </template>
 
 <script>
+import Navbar from '@/components/navbar'
+import ShowDay from '@/components/showday'
+import Cours from '@/components/cours'
 
 export default {
   name: 'app',
+  components: {
+    Navbar,
+    ShowDay,
+    Cours
+  },
   data () {
     return {
       showDate: window.DateTime.local(),
@@ -321,6 +109,7 @@ export default {
       thursdayCourses: [],
       fridayCourses: [],
       saturdayCourses: [],
+      courses: [],
       previousRequest: null
     }
   },
@@ -402,6 +191,7 @@ export default {
           this.thursdayCourses = response.data[3].courses
           this.fridayCourses = response.data[4].courses
           this.saturdayCourses = response.data[5].courses
+          this.courses = response.data
         }, (response) => {
           console.error(response)
         })
